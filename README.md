@@ -228,7 +228,7 @@ This tool is intended for **legal and ethical use only** — personal privacy au
 
 **Built by Ali Alaradi**
 
-*Cybersecurity Specialist & OSINT Researcher*
+*Cybersecurity Specialist & Security Researcher*
 
 [![GitHub](https://img.shields.io/badge/GitHub-0xcgz-181717?style=for-the-badge&logo=github)](https://github.com/0xcgz)
 
