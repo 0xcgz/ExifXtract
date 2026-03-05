@@ -1,1 +1,8 @@
-
+*.log
+Report_*.txt
+Report_*.json
+Bulk_Report_*.txt
+Bulk_Report_*.json
+CLEANED_*
+__pycache__/
+*.pyc
