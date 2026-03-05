@@ -15,11 +15,12 @@
 [![License](https://img.shields.io/badge/License-MIT-green?style=for-the-badge)](LICENSE)
 [![Field](https://img.shields.io/badge/Field-OSINT%20%26%20Forensics-red?style=for-the-badge&logo=target&logoColor=white)](https://github.com/0xcgz/ExifXtract)
 [![Version](https://img.shields.io/badge/Version-1.0.0-cyan?style=for-the-badge)](https://github.com/0xcgz/ExifXtract/releases)
+[![VirusTotal](https://img.shields.io/badge/VirusTotal-5%2F71_false_positives-orange?style=for-the-badge&logo=virustotal&logoColor=white)](https://www.virustotal.com/gui/file/4bc52c2b4a4950b514f2e1d9dd086c571e5e282aa1904c95ff7061a2a3410ca3/detection)
 [![Status](https://img.shields.io/badge/Status-Active-brightgreen?style=for-the-badge)](https://github.com/0xcgz/ExifXtract)
 
 <br>
 
-> A terminal-native forensic tool for extracting, analyzing, and sanitizing image metadata.  
+> A terminal-native forensic tool for extracting, analyzing, and sanitizing image metadata.
 > Built for OSINT researchers, privacy advocates, and digital forensics professionals.
 
 <br>
@@ -32,7 +33,7 @@
 
 ## What It Does
 
-Every image you take or receive carries invisible data embedded inside it — the device that took it, the exact GPS coordinates of where it was taken, the timestamp, software used, and more. Most people never see this data. ExifXtract surfaces all of it instantly.
+Every image you take or receive carries invisible data embedded inside it — the device that took it, the exact GPS coordinates, the timestamp, software used, and more. Most people never see this data. ExifXtract surfaces all of it instantly.
 
 Whether you're tracing the origin of an image in an investigation, checking what metadata your own photos expose, or sanitizing files before sharing them — ExifXtract gives you a clean, fast, terminal-native interface to do it all in seconds.
 
@@ -49,10 +50,10 @@ Whether you're tracing the origin of an image in an investigation, checking what
 | 🕵️ | **Steganography Detection** | Flags files whose size is anomalously large relative to resolution — possible hidden data |
 | 🛡️ | **Privacy Shield** | Strips all EXIF metadata and outputs a clean, tracker-free copy of the image |
 | 📊 | **Dual Report Export** | Saves both `.txt` (human-readable) and `.json` (machine-readable) forensic reports |
-| 📁 | **Bulk Folder Scan** | Recursively processes entire directories and consolidates results into one report |
+| 📁 | **Bulk Folder Scan** | Processes entire directories and consolidates results into one report |
 | 🖼️ | **Thumbnail Preview** | Opens a quick image preview before scanning so you confirm the right file |
-| ⚡ | **Headless CLI Mode** | Run fully without the GUI: `--path`, `--dir`, `--strip` flags for scripting/automation |
-| 🎨 | **Color-Coded Output** | Metadata tags color-coded by category: device, timestamps, GPS, dimensions |
+| ⚡ | **Headless CLI Mode** | Run fully without GUI: `--path`, `--dir`, `--strip` flags for scripting and automation |
+| 🎨 | **Color-Coded Output** | Metadata tags color-coded by category — device, timestamps, GPS, dimensions |
 | 📝 | **Session Logging** | Every operation appended to `exifxtract.log` for audit trails and replay |
 
 ---
@@ -72,10 +73,10 @@ pip install -r requirements.txt
 
 **3. Run it**
 ```bash
-python exifxtract.py
+python ExifXtract.py
 ```
 
-> **Optional:** Install `geopy` to enable reverse geocoding (street address from GPS coordinates)
+> **Optional:** Install `geopy` to enable reverse geocoding (resolves GPS to a real address)
 > ```bash
 > pip install geopy
 > ```
@@ -100,10 +101,10 @@ geopy>=2.3.0        # optional — enables reverse geocoding
 ### Interactive Mode (default)
 
 ```bash
-python exifxtract.py
+python ExifXtract.py
 ```
 
-You'll land on the main menu. Pick a module:
+You'll land on the main menu:
 
 ```
 [ 1 ]  Deep Analysis       —  Single file, full forensic scan
@@ -115,32 +116,30 @@ You'll land on the main menu. Pick a module:
 
 ### Headless / CLI Mode
 
-No GUI needed. Pass flags directly for scripting or automation:
-
 ```bash
 # Analyze a single image
-python exifxtract.py --path photo.jpg
+python ExifXtract.py --path photo.jpg
 
 # Bulk scan a directory
-python exifxtract.py --dir ./images/
+python ExifXtract.py --dir ./images/
 
 # Strip all metadata from an image
-python exifxtract.py --strip photo.jpg
+python ExifXtract.py --strip photo.jpg
 
 # Open thumbnail preview during scan
-python exifxtract.py --path photo.jpg --preview
+python ExifXtract.py --path photo.jpg --preview
 
 # Show version info
-python exifxtract.py --version
+python ExifXtract.py --version
 ```
 
 ---
 
 ## Output
 
-Every scan automatically generates two timestamped report files in the working directory:
+Every scan generates two timestamped reports automatically:
 
-**`Report_filename_20260305_143021.txt`** — Human-readable forensic log
+**`.txt`** — Human-readable forensic log
 ```
 [+] FILE   : DSCN0029.jpg
     SIZE   : 4,201.3 KB
@@ -156,14 +155,13 @@ Every scan automatically generates two timestamped report files in the working d
       Make                             NIKON
       Model                            COOLPIX P6000
       DateTime                         2008:11:01 21:15:09
-      ...
 ```
 
-**`Report_filename_20260305_143021.json`** — Machine-readable, ready to pipe into other tools
+**`.json`** — Machine-readable, ready to pipe into other tools
 ```json
 {
   "tool": "ExifXtract",
-  "version": "2.0.0",
+  "version": "1.0.0",
   "author": "Ali Alaradi",
   "results": [
     {
@@ -193,28 +191,43 @@ Every scan automatically generates two timestamped report files in the working d
 
 ---
 
-## Session Summary
+## Antivirus & VirusTotal
 
-At the end of every session, ExifXtract prints a quick summary:
+[![VirusTotal](https://img.shields.io/badge/VirusTotal-5%2F71_false_positives-orange?style=for-the-badge&logo=virustotal&logoColor=white)](https://www.virustotal.com/gui/file/4bc52c2b4a4950b514f2e1d9dd086c571e5e282aa1904c95ff7061a2a3410ca3/detection)
 
+`ExifXtract.exe` was scanned on VirusTotal and flagged by **5 out of 71 engines**.
+
+**This is a known false positive — not a real threat.** Here is exactly why:
+
+The `.exe` is compiled with **PyInstaller**, which bundles the Python interpreter and all libraries into a single executable. This packaging method is well-documented as a trigger for heuristic AV detections, regardless of what the actual code does. The flagging engines — Bkav Pro, Zillya, SecureAge, Fortinet, and Microsoft — are all known to produce high false-positive rates specifically on PyInstaller-compiled binaries.
+
+Microsoft's `Trojan:Win32/Wacatac.B!ml` label in particular is a **machine-learning heuristic** triggered by file structure alone, not by any actual malicious behavior. It is one of the single most commonly reported false positives in the PyInstaller open-source community.
+
+**All major engines are clean:**
+
+| Engine | Result |
+|--------|--------|
+| Bitdefender | ✅ Undetected |
+| Kaspersky | ✅ Undetected |
+| ESET-NOD32 | ✅ Undetected |
+| CrowdStrike Falcon | ✅ Undetected |
+| Avast | ✅ Undetected |
+| AVG | ✅ Undetected |
+| Malwarebytes | ✅ Undetected |
+| DrWeb | ✅ Undetected |
+| Google | ✅ Undetected |
+| + 57 others | ✅ Undetected |
+
+🔗 [View the full VirusTotal scan](https://www.virustotal.com/gui/file/4bc52c2b4a4950b514f2e1d9dd086c571e5e282aa1904c95ff7061a2a3410ca3/detection)
+
+The full source code is available in this repository — you can read every line, or run `python ExifXtract.py` directly instead of the `.exe` if you prefer.
+
+**Verify your download hasn't been tampered with:**
+```powershell
+Get-FileHash ExifXtract.exe -Algorithm SHA256
 ```
-─────────────── Session Summary ───────────────
-  Images scanned        12
-  With GPS data         7
-  Flagged (stego hint)  1
-```
+Expected: `4bc52c2b4a4950b514f2e1d9dd086c571e5e282aa1904c95ff7061a2a3410ca3`
 
----
-
-## How Steganography Detection Works
-
-ExifXtract compares a file's actual byte size against the theoretical uncompressed size for its resolution `(width × height × 3 bytes)`. If the actual file is more than **1.5×** what it should be, it gets flagged with a warning:
-
-```
-⚠ STEGO  File is 2.3x larger than expected — possible hidden data
-```
-
-This is a heuristic, not a guarantee. Use it as a signal to investigate further.
 
 ---
 
